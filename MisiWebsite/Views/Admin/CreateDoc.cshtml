@@ -1,0 +1,314 @@
+﻿
+@{
+    ViewBag.Title = "CreateDoc";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>CreateDoc</h2>
+<div class="bootstrap">
+    <div class="page-head">
+        <h2 class="page-title">SO-PR Automation</h2>
+        <ul class="breadcrumb page-breadcrumb">
+            <li class="breadcrumb-container">
+                <a href=""><i class="fa fa-file-text-o"></i>Forms</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="bootstrap">
+    <div class="alert alert-success">
+        <button data-dismiss="alert" class="close" type="button">x</button> Successful update
+    </div>
+</div>
+
+<!-- begin row -->
+<div class="row">
+    <div class="col-lg-12">
+        <form class="defaultForm form-horizontal AdminContacts">
+            <div class="panel">
+                <div class="panel-heading">
+                    <i class="icon-tablet"></i>
+                    Create New Doc No
+                </div>
+
+                <div class="form-wrapper">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#myModal" style="margin-bottom: 10px">
+                        + Create New Doc No
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Add PR</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <label>Trading Doc No</label>
+                                    <input type="text" class="form-control global" id="tradDoNo" placeholder="">
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--End Modal-->
+                    <!--Menu Collapse-->
+                    <div class="panel-group" id="accordion">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Sales Area</a>
+                                </h4>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse in">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        @*@(Html.Kendo().DropDownList()
+                                          .Name("products")
+                                          .DataTextField("Salesman")
+                                          .DataValueField("IdPartners")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .BindTo(Model)
+                                        )*@
+                                        <h2>Distribution Channel</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("distributionChannel")
+                                          .DataTextField("ProductName")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)                                                 
+                                          .BindTo(Model)                                                 
+                                        )
+                                    </div>
+                                    <div class="demo-section">
+                                        <h2>Division</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("division")
+                                          .DataTextField("SuplierID")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)
+                                          .BindTo(Model)
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Partners</a>
+                                </h4>
+                            </div>
+                            <div id="collapse2" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        <h2>Salesman</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("salesman")
+                                          .DataTextField("ProductName")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetProducts", "Home");
+                                              })
+                                              .ServerFiltering(true);
+                                          })
+                                        )
+                                    </div>
+                                    <div class="demo-section">
+                                        <h2>Ship-To-Party</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("shipToParty")
+                                          .DataTextField("ProductName")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetProducts", "Home");
+                                              })
+                                              .ServerFiltering(true);
+                                          })
+                                        )
+                                    </div>
+                                    <div class="demo-section">
+                                        <h2>Sold-To-Party</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("soldToParty")
+                                          .DataTextField("ProductName")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetProducts", "Home");
+                                              })
+                                              .ServerFiltering(true);
+                                          })
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Quotation Valid To</a>
+                                </h4>
+                            </div>
+                            <div id="collapse3" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        <h2>Quotation Valid To</h2>
+                                        @(Html.Kendo().ComboBox()
+                                          .Name("quotationValidTo")
+                                          .DataTextField("ProductName")
+                                          .DataValueField("ProductID")
+                                          .HtmlAttributes(new { style = "width:250px" })
+                                          .Filter("contains")
+                                          .AutoBind(false)
+                                          .MinLength(3)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("GetProducts", "Home");
+                                              })
+                                              .ServerFiltering(true);
+                                          })
+                                        )
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Customer PO Number</a>
+                                </h4>
+                            </div>
+                            <div id="collapse4" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        <h2>Customer PO Number</h2>
+                                        <input type="text" class="form-control global" id="custPoNumber" placeholder="">
+                                    </div>             
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Memo For PR</a>
+                                </h4>
+                            </div>
+                            <div id="collapse5" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        <h2>Memo For PR</h2>
+                                        <textarea class="form-control global" id="memoPr" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">Memo For SO</a>
+                                </h4>
+                            </div>
+                            <div id="collapse6" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                        <h2>Memo For SO</h2>
+                                        <textarea class="form-control global" id="memoSo" rows="5"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse7">DOC No</a>
+                                </h4>
+                            </div>
+                            <div id="collapse7" class="panel-collapse collapse">
+                                <div class="panel-body">
+                                    <div class="demo-section">
+                                       <div class="demo-section">
+                                           <h2>PR Number</h2>
+                                           <input type="text" class="form-control global" id="prNumber" placeholder="" />
+                                           
+                                           <h2>Quotation Number</h2>
+                                           <input type="text" class="form-control global" id="quotationNumber" placeholder="" />
+
+                                           <h2>Sales Order Number</h2>
+                                           <input type="text" class="form-control global" id="soNumber" placeholder="" />
+
+                                           <h2>Manual Quotation Number</h2>
+                                           <textarea class="form-control global" id="manQuotNumber" placeholder=""></textarea>
+                                       </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--End Menu Collapse-->
+                </div>
+                <div class="panel-footer">
+                    <button class="btn btn-default" name="submitAddcontact" id="contact_form_submit_btn" value="1" type="submit">
+                        <i class="process-icon-fa fa-save"></i> Save
+                    </button>
+                    <a onclick="window.history.back();" class="btn btn-default" href="">
+                        <i class="process-icon-fa fa-times"></i> Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- end row -->
+<!--Style for Combo Box-->
+<style scoped>
+    .demo-section {
+        width: 250px;
+        margin: auto;
+        padding: 0px;
+    }
+
+        .demo-section h2 {
+            text-transform: uppercase;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+</style>
+<!--End Style for Combo Box-->
+
+

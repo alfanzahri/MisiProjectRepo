@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @* Kontent CSS *@
+    @Styles.Render("~/Content/cssadmintheme")
+    @Styles.Render("~/Content/kendo/css")
+
+    @* Javascript *@
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/kendo")
+    @Scripts.Render("~/bundles/jsmodenzir")
+
+</head>
+<body class="ps_back-office page-sidebar admindashboard">
+    <header class="bootstrap" id="header">
+        <nav id="header_infos" role="navigation">
+            <div class="navbar-header">
+
+                <!-- <div id="header_toggle_menu" class="visible-lg-block">
+                    <a href="#" class="menu-collapse-desktop" title="Open/Close Menu"><i class="fa fa-bars"></i></a>
+                </div> -->
+
+                <a id="header_shopname" href="#">
+                    <img src="~/Content/img/tmt.png">Human Capital Management System
+                </a>
+
+                <ul id="header_employee_box">
+                    <!-- <li>
+                        <a title="View my shop" target="_blank" id="header_foaccess" href="http://localhost/prestashop/?live_configurator_token=dd7fe468a597720816edb69289370337&amp;id_employee=1&amp;id_shop=1">
+                            <i class="fa fa-star"></i>
+                            <span class="string-long">My shop</span>
+                            <span class="string-short">Shop</span>
+                        </a>
+                    </li> -->
+                    <li class="dropdown" id="employee_infos">
+                        <a data-toggle="dropdown" class="employee_name dropdown-toggle" href="">
+                            <span class="employee_avatar_small">
+                                <img width="32" height="32" src="~/Content/img/guruhkharisma@yahoo.com.jpg.png" alt="" class="imgm img-thumbnail">
+                            </span>
+                            <span class="string-long">Guruh&nbsp;Kharisma</span>
+                            <span class="string-short">Me</span>
+                            <i class="caret"></i>
+                        </a>
+                        <ul class="dropdown-menu" id="employee_links">
+                            <li>
+                                <span class="employee_avatar">
+                                    <img width="96" height="96" src="~/Content/img/guruhkharisma@yahoo.com.jpg.png" alt="" class="imgm img-thumbnail">
+                                </span>
+                            </li>
+                            <li class="text-center">Guruh Kharisma</li>
+                            <li class="divider"></li>
+                            <li><a href=""><i class="fa fa-wrench"></i> My preferences</a></li>
+                            <li class="divider"></li>
+                            <li><a href="" id="header_logout"><i class="fa fa-sign-out"></i> Sign out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- end header -->
+    <!-- begin main -->
+    <div id="main">
+        <!-- begin pusher -->
+        <div class="pusher bootstrap">
+            <!-- begin nav-sidebar -->
+            <nav id="nav-sidebar" role="navigation">
+                <ul class="menu" style="display: block;">
+                    <li class="searchtab">
+                        <form role="search" action="" method="post" class="bo_search_form" id="header_search">
+                            <div class="form-group">
+                                <input type="hidden" id="bo_search_type" name="bo_search_type">
+                                <div class="input-group">
+                                    <div class="input-group-btn">
+                                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                                            <i class="fa fa-search" id="search_type_icon"></i>
+                                            <i class="fa fa-caret-down"></i>
+                                        </button>
+                                        <ul class="dropdown-menu" id="header_search_options">
+                                            <li class="search-all search-option active">
+                                                <a data-icon="fa fa-search" data-placeholder="What are you looking for?" data-value="0" href="#">
+                                                    <i class="fa fa-search"></i> Everywhere
+                                                </a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li class="search-book search-option">
+                                                <a data-icon="fa fa-book" data-placeholder="Employee Data..." data-value="1" href="#">
+                                                    <i class="fa fa-book"></i> Employee Data
+                                                </a>
+                                            </li>
+                                            <li class="search-customers-name search-option">
+                                                <a data-icon="fa fa-group" data-placeholder="Customers by name..." data-value="2" href="#">
+                                                    <i class="fa fa-group"></i> Customers by name
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <a class="clear_search hide" href="#">
+                                        <i class="fa fa-remove"></i>
+                                    </a>
+                                    <input type="text" placeholder="Search" value="" class="form-control" name="bo_query" id="bo_query">
+                                    <!--  							<span class="input-group-btn">
+                                    <button type="submit" id="bo_search_submit" class="btn btn-primary">
+                                    <i class="fa fa-search"></i>
+                                    </button>
+                                    </span> -->
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    <li data-submenu="1" id="maintab-AdminDashboard" class="maintab active">
+                        <a class="title" href="dashboard.html">
+                            <i class="fa fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li data-submenu="9" id="maintab-AdminCatalog" class="maintab  has_submenu">
+                        <a class="title" href="">
+                            <i class="fa fa-file-o"></i>
+                            <span>SO-PR Automation</span>
+                            <span class="icon-chevron-right pull-right pos-absolute pos-top-10 pos-right-10"></span>
+                        </a>
+                        <ul class="submenu">
+                            <li id="subtab-AdminProducts">
+                                @Html.ActionLink("Create New Doc", "CreateDoc", "Admin")
+                            </li>
+                            <li id="subtab-AdminProducts">
+                                @Html.ActionLink("Create With Reference", "Index", "Admin")
+                            </li>
+                            <li id="subtab-AdminProducts">
+                                @Html.ActionLink("Add PR", "Add_Pr", "Admin")
+                            </li>
+                            <li id="subtab-AdminProducts">
+                                @Html.ActionLink("Block", "Index", "Admin")
+                            </li>
+                            <li id="subtab-AdminCategories">
+                                <a href="table.html">
+                                    Table
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <span class="menu-collapse"><i class="icon-align-justify"></i></span>
+            </nav>
+            <!-- end nav-sidebar -->
+        </div>
+        <!-- end pusher -->
+        <!-- begin content -->
+        <div id="content" class="bootstrap">
+            @RenderBody()
+            @RenderSection("scripts", required: false)
+        </div>
+        <!-- end content -->
+    </div>
+    <!-- end main -->
+    @Scripts.Render("~/bundles/jsadmintheme")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jsmodenzirload")
+</body>
+</html>
